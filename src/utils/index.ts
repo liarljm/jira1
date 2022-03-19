@@ -11,7 +11,7 @@ export const cleanObject = (object: object) => {
   });
   return result;
 };
-export const isFalsy = (value: any) => (value === 0 ? false : !value);
+export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
 export const useMount = (callback: () => void) => {
   useEffect(() => {
@@ -32,7 +32,7 @@ export const useMount = (callback: () => void) => {
 // }
 // const log = debounce(() => console.log('call'), 5000);
 // log();
-export const useDebounce = (value: any, delay?: number) => {
+export const useDebounce = (value: unknown, delay?: number): any => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const timeout = setTimeout(() => setDebouncedValue(value), delay);
