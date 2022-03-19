@@ -32,7 +32,7 @@ export const useMount = (callback: () => void) => {
 // }
 // const log = debounce(() => console.log('call'), 5000);
 // log();
-export const useDebounce = (value: unknown, delay?: number): any => {
+export const useDebounce = <v>(value: v, delay?: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
     const timeout = setTimeout(() => setDebouncedValue(value), delay);
