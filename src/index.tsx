@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { DevTools, loadServer } from "jira-dev-tool";
 import { AppProviders } from "./context";
+//在jira-dev-tool后引入
 loadServer(() =>
   ReactDOM.render(
     <React.StrictMode>
