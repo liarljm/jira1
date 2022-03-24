@@ -1,4 +1,4 @@
-import ProjectListScreen from "./screens";
+import ProjectListScreen from "screens/project-list";
 import "./App.css";
 import { Test } from "test";
 import { useAuth } from "context/auth_context";
