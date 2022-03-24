@@ -1,5 +1,6 @@
 import React from "react";
 import { User } from "./search-panel";
+import { Table } from "antd";
 interface Project {
   id: string;
   name: string;
@@ -15,27 +16,28 @@ const List = ({ list, users }: ListProps) => {
   console.log("list", list);
   console.log("users", users);
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>项目名称</th>
-          <th>负责人</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map((project) => {
-          return (
-            <tr key={project.id}>
-              <td>{project.name}</td>
-              <td>
+    <Table
+      pagination={false}
+      dataSource={list}
+      columns={[
+        {
+          title: "名称",
+          dataIndex: "name",
+          sorter: (a, b) => a.name.localeCompare(b.name),
+        },
+        {
+          title: "负责人",
+          render(value, project) {
+            return (
+              <span>
                 {users.find((user) => user.id === project.personId)?.name ||
                   "未知"}
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+              </span>
+            );
+          },
+        },
+      ]}
+    />
   );
 };
 export default List;
