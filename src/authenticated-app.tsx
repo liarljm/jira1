@@ -1,7 +1,7 @@
 import { useAuth } from "context/auth_context";
 import React from "react";
 import ProjectListScreen from "screens/project-list";
-import { Dropdown, Menu } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import styled from "@emotion/styled";
 import { Row } from "components/lib";
 import { ReactComponent as SoftwareLogo } from "assets/software-logo.svg";
@@ -21,16 +21,20 @@ export const AuthenticatedApp = () => {
             overlay={
               <Menu>
                 <Menu.Item key="logout">
-                  <a onClick={logout}>登出</a>
+                  <Button type="link" onClick={logout}>
+                    登出
+                  </Button>
                 </Menu.Item>
               </Menu>
             }
           >
-            <a onClick={(e) => e.preventDefault()}>Hi,{user?.name}</a>
+            <Button type="link" onClick={(e) => e.preventDefault()}>
+              Hi,{user?.name}
+            </Button>
           </Dropdown>
         </HeaderRight>
       </Header>
-      <PageHeader />
+      {/* <PageHeader /> */}
 
       <Main>
         <ProjectListScreen />
@@ -43,7 +47,7 @@ const PageHeader = styled.header`
 `;
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 6rem 1fr 6rem;
+  grid-template-rows: 6rem 1fr;
   height: 100vh;
 `;
 const Main = styled.main`

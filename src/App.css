@@ -3,6 +3,6 @@ html {
   rem 相对于根元素font-size */
   font-size: 62.5%;
 }
-html body #root .App {
+/* html body #root .App {
   min-height: 100vh;
-}
+} */

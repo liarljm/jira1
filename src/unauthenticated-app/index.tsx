@@ -16,9 +16,9 @@ export const UnauthenticatedApp = () => {
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
         {isRegister ? <RegisterScreen /> : <LoginScreen />}
         <Divider />
-        <a onClick={() => setIsRegister(!isRegister)}>
+        <Button type="link" onClick={() => setIsRegister(!isRegister)}>
           切换到{isRegister ? "已经有账号了？直接登录" : "没有账号？注册新账号"}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   );
@@ -30,8 +30,8 @@ const Background = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: left bottom, right bottom;
-  background-size: calc(((100vw-40 rem) / 2)-3.2rem),
-    calc(((100vw-40 rem) / 2)-3.2rem);
+  background-size: calc(((100vw - 40rem) / 2) - 3.2rem),
+    calc(((100vw - 40rem) / 2) - 3.2rem), cover;
 
   background-image: url(${left}), url(${right});
 `;
@@ -45,7 +45,7 @@ const ShadowCard = styled(Card)`
   width: 40rem;
   min-height: 56rem;
   padding: 3.2rem 4rem;
-  border-radius: 0%.3rem;
+  border-radius: 0.3rem;
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 10px;
   text-align: center;

@@ -29,6 +29,7 @@ export const http = async (
   //axios 和fetch表现不同，axios可直接在返回状态不为2XX的时候抛出异常
   return window
     .fetch(`${apiUrl}/${endpoint}`, config)
+
     .then(async (response) => {
       if (response.status === 401) {
         await auth.logout();
@@ -45,8 +46,11 @@ export const http = async (
 };
 export const useHttp = () => {
   const { user } = useAuth();
-  return (...[endpoint, config]: Parameters<typeof http>) =>
-    http(endpoint, { ...config, token: user?.token });
+  return useCallback(
+    (...[endpoint, config]: Parameters<typeof http>) =>
+      http(endpoint, { ...config, token: user?.token }),
+    [user?.token]
+  );
   //TS 的typeof是在静态环境下运行，JS 的typeof是在runtime下运行
   //utility type用法：用泛型给他传入其他类型然后做其他操作
 };
