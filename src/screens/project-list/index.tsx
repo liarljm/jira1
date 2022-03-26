@@ -5,7 +5,7 @@ import { Project } from "./list";
 import * as qs from "qs";
 import SearchPanel from "./search-panel";
 import List from "./list";
-import { useMount, useDebounce } from "utils";
+import { useMount, useDebounce, useDocumentTitle } from "utils";
 import { useHttp } from "utils/http";
 import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
@@ -15,6 +15,7 @@ const ProjectListScreen = () => {
     name: "",
     personId: "",
   });
+
   const debouncedParam = useDebounce(param, 500);
   // const [users, setUsers] = useState([]);
   // const client = useHttp();
@@ -47,6 +48,7 @@ const ProjectListScreen = () => {
   //   }
   // });
   // });
+  useDocumentTitle("项目列表", false);
   return (
     <Container>
       <h1>项目列表</h1>

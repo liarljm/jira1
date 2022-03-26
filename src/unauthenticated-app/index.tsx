@@ -6,12 +6,15 @@ import { RegisterScreen } from "./register";
 import logo from "assets/logo.svg";
 import left from "assets/left.svg";
 import right from "assets/right.svg";
+
 export const UnauthenticatedApp = () => {
   const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  // useDocumentTitle("请登录注册以继续",false)
   return (
     <Container>
       <Header />
+
       <Background />
       <ShadowCard>
         <Title>{isRegister ? "请注册" : "请登录"}</Title>
@@ -31,6 +34,7 @@ export const UnauthenticatedApp = () => {
     </Container>
   );
 };
+
 const Background = styled.div`
   position: absolute;
   width: 100%;
