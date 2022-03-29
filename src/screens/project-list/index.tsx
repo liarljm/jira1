@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
-import { Typography } from "antd";
-import { Project } from "./list";
-import * as qs from "qs";
+import { Row, Typography, Button } from "antd";
 import SearchPanel from "./search-panel";
 import List from "./list";
-import { useMount, useDebounce, useDocumentTitle } from "utils";
-import { useHttp } from "utils/http";
+import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
-const ProjectListScreen = () => {
+const ProjectListScreen = (props: {
+  setProjectModalOpen: (isOpen: boolean) => void;
+}) => {
   const [param, setParam] = useState({
     name: "",
     personId: "",
@@ -49,14 +48,29 @@ const ProjectListScreen = () => {
   // });
   // });
   useDocumentTitle("项目列表", false);
+  let { setProjectModalOpen } = props;
   return (
     <Container>
-      <h1>项目列表</h1>
+      <Row>
+        <h1>项目列表</h1>
+        <Button
+          style={{ marginLeft: "170vh" }}
+          onClick={() => setProjectModalOpen(true)}
+        >
+          创建项目
+        </Button>
+      </Row>
+
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type="danger">{error.message}</Typography.Text>
       ) : null}
-      <List loading={isLoading} users={users || []} dataSource={list || []} />
+      <List
+        loading={isLoading}
+        setProjectModalOpen={setProjectModalOpen}
+        users={users || []}
+        dataSource={list || []}
+      />
     </Container>
   );
 };
