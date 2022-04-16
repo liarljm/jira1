@@ -4,6 +4,8 @@ import { Dropdown, Menu, Table } from "antd";
 import { TableProps } from "antd/es/table";
 import dayjs from "dayjs";
 import { ButtonNoPadding } from "components/lib";
+import { useDispatch } from "react-redux";
+import { projectListActions } from "./project-list.slice";
 export interface Project {
   id: number;
   name: string;
@@ -15,17 +17,21 @@ export interface Project {
 interface ListProps extends TableProps<Project> {
   users: User[];
   refresh?: () => void;
-  setProjectModalOpen: (isOpen: boolean) => void;
+  // setProjectModalOpen: (isOpen: boolean) => void;
+  projectButton: JSX.Element;
 }
 const List = ({ users, ...props }: ListProps) => {
-  const { setProjectModalOpen } = props;
-  console.log("users", users);
+  // const { setProjectModalOpen } = props;
+  const { projectButton } = props;
+  // console.log("users", users);
+  const dispatch = useDispatch();
 
   return (
     <Table
       pagination={false}
       rowKey="id"
       columns={[
+        {},
         {
           title: "名称",
           dataIndex: "name",
@@ -68,10 +74,13 @@ const List = ({ users, ...props }: ListProps) => {
                     <Menu.Item key={"edit"}>
                       <ButtonNoPadding
                         type="link"
-                        onClick={() => setProjectModalOpen(true)}
+                        onClick={() =>
+                          dispatch(projectListActions.openProjectModal())
+                        }
                       >
                         编辑
                       </ButtonNoPadding>
+                      {/* {projectButton} */}
                     </Menu.Item>
                   </Menu>
                 }

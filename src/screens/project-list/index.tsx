@@ -7,8 +7,13 @@ import { useDebounce, useDocumentTitle } from "utils";
 import styled from "@emotion/styled";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
+import { useDispatch } from "react-redux";
+import { ButtonNoPadding } from "components/lib";
+import { projectListActions } from "./project-list.slice";
+
 const ProjectListScreen = (props: {
-  setProjectModalOpen: (isOpen: boolean) => void;
+  // setProjectModalOpen: (isOpen: boolean) => void;
+  projectButton: JSX.Element;
 }) => {
   const [param, setParam] = useState({
     name: "",
@@ -20,7 +25,7 @@ const ProjectListScreen = (props: {
   // const client = useHttp();
   const { isLoading, error, data: list } = useProjects(debouncedParam);
   const { data: users } = useUsers();
-
+  const dispatch = useDispatch();
   // useEffect(() => {
   //   run( client("projects", { data: cleanObject(debouncedParam) }))
   // setIsLoading(true)
@@ -48,17 +53,23 @@ const ProjectListScreen = (props: {
   // });
   // });
   useDocumentTitle("项目列表", false);
-  let { setProjectModalOpen } = props;
+  // let { setProjectModalOpen } = props;
   return (
     <Container>
       <Row>
         <h1>项目列表</h1>
-        <Button
+        <ButtonNoPadding
           style={{ marginLeft: "170vh" }}
-          onClick={() => setProjectModalOpen(true)}
+          onClick={() => dispatch(projectListActions.openProjectModal())}
+          type="link"
         >
           创建项目
-        </Button>
+        </ButtonNoPadding>
+        <div
+        // style={{ marginLeft: "170vh" }}
+        >
+          {/* {props.projectButton} */}
+        </div>
       </Row>
 
       <SearchPanel users={users || []} param={param} setParam={setParam} />
@@ -67,7 +78,8 @@ const ProjectListScreen = (props: {
       ) : null}
       <List
         loading={isLoading}
-        setProjectModalOpen={setProjectModalOpen}
+        projectButton={props.projectButton}
+        // setProjectModalOpen={setProjectModalOpen}
         users={users || []}
         dataSource={list || []}
       />
